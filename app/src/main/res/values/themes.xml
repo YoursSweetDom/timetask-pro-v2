@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash Screen + App Theme -->
+    <style name="Theme.TimeTaskProV2" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Splash screen background = Titanium Background (#0F172A) -->
+        <item name="android:windowBackground">@color/splash_background</item>
+        <item name="android:statusBarColor">@color/splash_background</item>
+        <item name="android:navigationBarColor">@color/splash_background</item>
+    </style>
+</resources>

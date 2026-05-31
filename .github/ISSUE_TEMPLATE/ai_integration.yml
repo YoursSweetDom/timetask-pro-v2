@@ -1,0 +1,52 @@
+name: AI integration task
+description: Propose or track AI assistant work with privacy constraints.
+title: "[AI]: "
+labels:
+  - ai
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        AI work must be privacy-first: no hard-coded API keys, minimal context sharing, structured output, and user confirmation before writes.
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: What should the AI help the user do?
+      placeholder: Parse a natural-language task into title, due date, tags, and priority.
+    validations:
+      required: true
+  - type: textarea
+    id: data-context
+    attributes:
+      label: Required task context
+      description: What local data is needed for this AI action?
+      placeholder: Current input text only, or selected task list with due dates.
+    validations:
+      required: true
+  - type: textarea
+    id: output-contract
+    attributes:
+      label: Structured output contract
+      description: What JSON or typed result should the model return?
+      render: json
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy checklist
+      options:
+        - label: The feature can work without hard-coded API keys.
+          required: true
+        - label: The feature sends only the minimum useful context.
+          required: true
+        - label: The user can review AI output before local data is changed.
+          required: true
+        - label: The feature has a local fallback or clear unavailable state.
+          required: false
+  - type: textarea
+    id: tests
+    attributes:
+      label: Test plan
+      description: How should this be tested?
+

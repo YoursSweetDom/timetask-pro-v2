@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+
+    <application
+        android:name=".TimeTaskApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TimeTaskProV2">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.TimeTaskProV2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Timer Alarm Activity — полноэкранный будильник поверх lock screen -->
+        <activity
+            android:name=".presentation.tools.timers.TimerAlarmActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.timetask.pro.v2.alarm"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.TimeTaskProV2" />
+
+        <!-- Timer Foreground Service (отслеживание таймеров) -->
+        <service
+            android:name=".service.TimerService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Timer Alarm Service (звук + вибрация при завершении) -->
+        <service
+            android:name=".service.TimerAlarmService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Timer Alarm Receiver (AlarmManager → onTimerExpired) -->
+        <receiver
+            android:name=".service.TimerAlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- Timer Dismiss Receiver (Мгновенное возрождение уведомления при смахивании) -->
+        <receiver
+            android:name=".service.TimerDismissReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.timetask.pro.v2.ACTION_TIMER_NOTIFICATION_DISMISS" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Stopwatch Foreground Service (Фоновый отсчет секундомеров) -->
+        <service
+            android:name=".service.StopwatchService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
+
+        <!-- Stopwatch Dismiss Receiver (Мгновенное возрождение уведомления секундомера) -->
+        <receiver
+            android:name=".service.StopwatchDismissReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.timetask.pro.v2.ACTION_STOPWATCH_DISMISS" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Boot Receiver (восстановление таймеров после перезагрузки) -->
+        <receiver
+            android:name=".service.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- ========================================== -->
+        <!--             ALARM SYSTEM (V2)             -->
+        <!-- ========================================== -->
+
+        <!-- Alarm Ringing Activity (Swipe to dismiss) -->
+        <activity
+            android:name=".presentation.tools.alarms.AlarmRingingActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:taskAffinity="com.timetask.pro.v2.alarm"
+            android:showOnLockScreen="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.TimeTaskProV2" />
+
+        <!-- Alarm Ringing Service (MediaPlayer + Vibrator + Foreground Lock) -->
+        <service
+            android:name=".service.alarm.AlarmRingingService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+
+        <!-- Alarm Receiver (Catches the Exact AlarmManager trigger) -->
+        <receiver
+            android:name=".service.alarm.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
+
+        <!-- Alarm Boot Receiver (Reschedules all alarms on device Reboot) -->
+        <receiver
+            android:name=".service.alarm.BootReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

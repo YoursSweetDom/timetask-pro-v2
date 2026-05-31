@@ -1,0 +1,22 @@
+name: Documentation
+description: Report missing, unclear, or outdated documentation.
+title: "[Docs]: "
+labels:
+  - documentation
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: Location
+      description: Which file or section needs work?
+      placeholder: README.md, docs/AI_ASSISTANT_DESIGN.md, build instructions...
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: What should change?
+      placeholder: This section should explain...
+    validations:
+      required: true
+
