@@ -4,6 +4,12 @@ All notable public changes to TimeTask Pro V2 will be documented in this file.
 
 ## Unreleased
 
+No unreleased public changes yet.
+
+## v0.1.1-alpha
+
+Second public alpha maintenance release focused on AI parsing quality and repository verification.
+
 ### Added
 
 - Added unit tests for OpenAI response text extraction, AI input normalization, local fallback parsing, and oversized-context rejection.
