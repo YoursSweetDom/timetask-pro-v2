@@ -6,6 +6,12 @@ The long-term goal is to explore privacy-preserving AI workflows for personal pr
 
 > Status: active alpha. Core Android modules are implemented, and the OpenAI-backed assistant layer now has initial domain contracts, network client scaffolding, structured-output schema, and local fallback parsing. UI integration is still in progress.
 
+## Ecosystem Direction
+
+TimeTask Pro V2 is planned as the time-management layer of a broader local-first AI productivity ecosystem. A future optional companion integration with RefrAIct AI Android may connect task planning with a personal AI workspace, memory-oriented workflows, model orchestration, and long-running reasoning sessions.
+
+This repository remains standalone: it does not include RefrAIct source code, does not depend on RefrAIct at runtime, and does not silently share task data. See [docs/ECOSYSTEM.md](docs/ECOSYSTEM.md) for the roadmap direction and privacy boundaries.
+
 ## Features
 
 - Task management with Inbox, All, Today, Tomorrow, Next 7 Days, folder, tag, category, and custom-filter navigation.

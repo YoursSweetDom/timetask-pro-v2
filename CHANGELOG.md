@@ -17,12 +17,14 @@ The project is currently being prepared for its first open source release.
 - Added root `AGENTS.md` with Codex/agent contribution guidance, build commands, privacy rules, and repository boundaries.
 - Added GitHub Actions Android CI workflow for `:app:compileDebugKotlin`.
 - Removed committed machine-specific Gradle Java home fallback so public builds can use the active JDK 21 environment.
+- Added `docs/ECOSYSTEM.md` to document the future optional TimeTask Pro V2 + RefrAIct AI Android companion direction and privacy boundaries.
 
 ### Notes
 
 - The Android app is in active alpha.
 - Core productivity modules are implemented in Kotlin and Jetpack Compose.
 - OpenAI-backed assistant behavior is planned, but not yet implemented as a production feature.
+- RefrAIct AI Android is a separate project and is not a runtime dependency of TimeTask Pro V2.
 
 ## v0.1.0-alpha
 
