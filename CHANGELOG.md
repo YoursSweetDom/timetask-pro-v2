@@ -2,9 +2,22 @@
 
 All notable public changes to TimeTask Pro V2 will be documented in this file.
 
-The project is currently being prepared for its first open source release.
-
 ## Unreleased
+
+### Added
+
+- Added unit tests for OpenAI response text extraction, AI input normalization, local fallback parsing, and oversized-context rejection.
+- Added GitHub Actions security scan for accidental API keys, tokens, and private-key blocks in tracked files.
+
+### Changed
+
+- Updated Android CI to run unit tests before compiling debug Kotlin.
+- Improved AI task parsing input validation by normalizing whitespace, trimming known labels, deduplicating labels case-insensitively, and limiting oversized AI input.
+- Improved local fallback parsing with normalized multiline input, case-insensitive tag deduplication, English/Ukrainian priority terms, and English fallback warnings.
+
+## v0.1.0-alpha
+
+First public alpha release.
 
 ### Added
 
@@ -25,7 +38,3 @@ The project is currently being prepared for its first open source release.
 - Core productivity modules are implemented in Kotlin and Jetpack Compose.
 - OpenAI-backed assistant behavior is planned, but not yet implemented as a production feature.
 - RefrAIct AI Android is a separate project and is not a runtime dependency of TimeTask Pro V2.
-
-## v0.1.0-alpha
-
-Planned first public alpha release.

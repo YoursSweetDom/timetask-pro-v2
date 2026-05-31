@@ -8,10 +8,11 @@ The repository includes the first AI task parsing foundation:
 
 - `domain/model/ai` contains clean task-draft models.
 - `domain/repository/AiTaskParserRepository.kt` defines the parsing abstraction.
-- `domain/usecase/ai/ParseTaskInputWithAiUseCase.kt` validates input and delegates parsing.
+- `domain/usecase/ai/ParseTaskInputWithAiUseCase.kt` validates input, normalizes whitespace, limits oversized input, and delegates parsing.
 - `core/network/openai` contains a minimal OpenAI Responses API client.
 - `data/ai/OpenAiTaskParserRepository.kt` maps OpenAI Structured Outputs into domain models.
-- `data/ai/LocalRuleBasedTaskParserRepository.kt` provides a basic offline fallback.
+- `data/ai/LocalRuleBasedTaskParserRepository.kt` provides a basic offline fallback with time, tag, and priority detection.
+- Unit tests cover response text extraction, input normalization, oversized-context rejection, and fallback parsing behavior.
 
 This layer is intentionally not connected to UI yet.
 
@@ -55,7 +56,6 @@ Never hard-code API keys into Kotlin source, Gradle files, resources, or committ
 
 - Add settings UI for AI provider configuration.
 - Add encrypted local storage for user-provided API keys.
-- Add unit tests for schema decoding and local fallback parsing.
+- Add broader tests for schema decoding, repository error handling, and UI review flows.
 - Connect Quick Add to the use case behind a feature flag.
 - Add a review sheet before saving AI-generated task drafts.
-

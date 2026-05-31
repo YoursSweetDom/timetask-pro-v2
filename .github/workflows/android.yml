@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   build:
-    name: Compile debug Kotlin
+    name: Test and compile debug Kotlin
     runs-on: ubuntu-latest
     timeout-minutes: 35
 
@@ -43,7 +43,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Compile debug Kotlin
+      - name: Run unit tests and compile debug Kotlin
         run: |
           chmod +x ./gradlew
-          ./gradlew :app:compileDebugKotlin --no-daemon
+          ./gradlew test :app:compileDebugKotlin --no-daemon

@@ -12,11 +12,39 @@ class ParseTaskInputWithAiUseCase(
     private val repository: AiTaskParserRepository,
 ) {
     suspend operator fun invoke(request: AiTaskParseRequest): AiTaskParseResult {
-        if (request.input.isBlank()) {
-            return AiTaskParseResult.Unavailable("Пустой текст задачи.")
+        val normalizedInput = request.input.normalizeForAi()
+        if (normalizedInput.isBlank()) {
+            return AiTaskParseResult.Unavailable("Task input is empty.")
         }
 
-        return repository.parseTask(request)
+        if (normalizedInput.length > MAX_INPUT_CHARS) {
+            return AiTaskParseResult.Unavailable("Task input is too long for AI parsing.")
+        }
+
+        return repository.parseTask(
+            request.copy(
+                input = normalizedInput,
+                knownTags = request.knownTags.sanitizedKnownLabels(),
+                knownFolders = request.knownFolders.sanitizedKnownLabels(),
+                knownCategories = request.knownCategories.sanitizedKnownLabels(),
+            )
+        )
+    }
+
+    private fun String.normalizeForAi(): String {
+        return trim().replace(whitespaceRegex, " ")
+    }
+
+    private fun List<String>.sanitizedKnownLabels(): List<String> {
+        return map { it.normalizeForAi() }
+            .filter { it.isNotBlank() }
+            .distinctBy { it.lowercase() }
+            .take(MAX_KNOWN_LABELS)
+    }
+
+    private companion object {
+        const val MAX_INPUT_CHARS = 4_000
+        const val MAX_KNOWN_LABELS = 50
+        val whitespaceRegex = Regex("""\s+""")
     }
 }
-

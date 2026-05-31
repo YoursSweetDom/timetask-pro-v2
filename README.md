@@ -107,12 +107,13 @@ Key ideas:
 - [x] Timer, stopwatch, and alarm service infrastructure.
 - [x] AI task parsing contracts, OpenAI Responses API client, Structured Outputs schema, and local fallback parser.
 - [x] Public GitHub documentation, contributor guide, and issue templates.
-- [x] GitHub Actions Android build workflow.
-- [ ] Unit tests for repositories, filters, migrations, and AI contracts.
+- [x] GitHub Actions Android test and build workflow.
+- [x] First public alpha release.
+- [x] Initial unit tests for AI response extraction, input validation, and local fallback parsing.
+- [ ] Unit tests for repositories, filters, migrations, and broader domain contracts.
 - [ ] Connect OpenAI-backed natural-language task parser to Quick Add UI.
 - [ ] AI day planner with user confirmation before writes.
 - [ ] Weekly productivity summaries with privacy controls.
-- [ ] First public alpha release.
 
 ## Getting Started
 
@@ -137,10 +138,16 @@ For a faster compile-only check:
 .\gradlew.bat :app:compileDebugKotlin --no-daemon
 ```
 
-Run unit tests when test coverage is added or updated:
+Run unit tests:
 
 ```powershell
-.\gradlew.bat test
+.\gradlew.bat test --no-daemon
+```
+
+Run the same focused verification used by CI:
+
+```powershell
+.\gradlew.bat test :app:compileDebugKotlin --no-daemon
 ```
 
 Install a debug build on a connected device:
@@ -157,7 +164,7 @@ If OpenAI API support is added, provide keys through a local-only configuration 
 
 ## Contributing
 
-Contributions are welcome after the public repository is prepared. Good first areas include:
+Contributions are welcome. Good first areas include:
 
 - documentation cleanup;
 - reproducible build setup;
