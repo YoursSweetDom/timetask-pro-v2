@@ -8,11 +8,10 @@ package com.timetask.pro.v2.domain.model.ai
  */
 data class AiTaskParseRequest(
     val input: String,
-    val locale: String = "ru",
+    val locale: String = "uk-UA",
     val referenceDateIso: String,
     val timeZoneId: String,
     val knownTags: List<String> = emptyList(),
     val knownFolders: List<String> = emptyList(),
     val knownCategories: List<String> = emptyList(),
 )
-
