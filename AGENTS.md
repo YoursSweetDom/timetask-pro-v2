@@ -56,8 +56,8 @@ Notes:
 - Do not modify Room entities without adding the required migrations and schema updates.
 - Do not commit generated build outputs, APK/AAB files, `.gradle/`, `.idea/`, `local.properties`, secrets, or `ai_workspace/`.
 - Kotlin identifiers, packages, classes, and functions must remain in English.
-- User-facing Android UI strings should remain Russian unless a localization task says otherwise.
-- Code comments may be Russian when they explain non-obvious behavior.
+- User-facing Android UI strings should follow the existing app locale unless a localization task says otherwise.
+- Code comments should stay concise and match the language already used in the surrounding file.
 
 ## AI and Privacy Rules
 
