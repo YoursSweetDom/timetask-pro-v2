@@ -14,6 +14,9 @@ The project is currently being prepared for its first open source release.
 - Added `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, GitHub issue templates, and pull request template.
 - Added AI task parsing foundation with domain contracts, OpenAI Responses API client, Structured Outputs schema, OpenAI repository, and local rule-based fallback.
 - Added `docs/AI_ASSISTANT_DESIGN.md`.
+- Added root `AGENTS.md` with Codex/agent contribution guidance, build commands, privacy rules, and repository boundaries.
+- Added GitHub Actions Android CI workflow for `:app:compileDebugKotlin`.
+- Removed committed machine-specific Gradle Java home fallback so public builds can use the active JDK 21 environment.
 
 ### Notes
 

@@ -4,7 +4,7 @@ TimeTask Pro V2 is an offline-first Android productivity app built with Kotlin a
 
 The long-term goal is to explore privacy-preserving AI workflows for personal productivity: natural-language task capture, day planning, and weekly review summaries where the user stays in control of what context is shared and what actions are written back to the local database.
 
-> Status: active alpha. Core Android modules are implemented, while the OpenAI-backed assistant layer is currently in the architecture and roadmap phase.
+> Status: active alpha. Core Android modules are implemented, and the OpenAI-backed assistant layer now has initial domain contracts, network client scaffolding, structured-output schema, and local fallback parsing. UI integration is still in progress.
 
 ## Features
 
@@ -101,7 +101,7 @@ Key ideas:
 - [x] Timer, stopwatch, and alarm service infrastructure.
 - [x] AI task parsing contracts, OpenAI Responses API client, Structured Outputs schema, and local fallback parser.
 - [x] Public GitHub documentation, contributor guide, and issue templates.
-- [ ] GitHub Actions build workflow.
+- [x] GitHub Actions Android build workflow.
 - [ ] Unit tests for repositories, filters, migrations, and AI contracts.
 - [ ] Connect OpenAI-backed natural-language task parser to Quick Add UI.
 - [ ] AI day planner with user confirmation before writes.
@@ -113,7 +113,8 @@ Key ideas:
 ### Prerequisites
 
 - Android Studio with a recent Android SDK.
-- JDK 21. The project is configured to use the Android Studio JBR path in `gradle.properties`.
+- JDK 21 through `JAVA_HOME`, Android Studio JBR, or the active shell environment.
+- Android SDK Platform 36.1 and Build Tools 36.1.0.
 - An Android emulator or device running Android 8.0 or newer.
 
 ### Build
@@ -122,6 +123,12 @@ Clone the repository and run:
 
 ```powershell
 .\gradlew.bat assembleDebug
+```
+
+For a faster compile-only check:
+
+```powershell
+.\gradlew.bat :app:compileDebugKotlin --no-daemon
 ```
 
 Run unit tests when test coverage is added or updated:
